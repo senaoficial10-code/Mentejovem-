@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MenteJovem</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#fff;--ink:#1f1b3a;--mut:#4d4a72;--pu:#5b3fd6;--put:#4a2fc4;--bl:#2563eb;--blt:#1d4ed8;--soft:#f6f4ff;--soft2:#f1f6ff;--bd:#e4e0f7;--bd2:#d6e4ff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12101f;--ink:#efedff;--mut:#b5b1d9;--put:#b3a2ff;--blt:#8db1ff;--soft:#1e1a36;--soft2:#161b33;--bd:#312c55;--bd2:#27315a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12101f;--ink:#efedff;--mut:#b5b1d9;--put:#b3a2ff;--blt:#8db1ff;--soft:#1e1a36;--soft2:#161b33;--bd:#312c55;--bd2:#27315a;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,sans-serif}
+button,textarea,input{font-family:inherit;font-size:15px;color:inherit}
+button{cursor:pointer}
+#app{max-width:440px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 8px}
+.logo{font-size:24px;font-weight:800;color:var(--put)}.logo span{color:var(--blt)}
+.badge{border:1px solid var(--bd);background:var(--soft);color:var(--put);font-weight:800;font-size:12px;padding:0 12px;min-height:44px;border-radius:22px}
+main{flex:1;padding:8px 20px 24px;display:flex;flex-direction:column;gap:14px}
+h1{font-size:27px;line-height:1.15;margin:0}h2{font-size:20px;margin:0}
+.mut{color:var(--mut);font-size:14px}
+.card{border:1px solid var(--bd);border-radius:20px;padding:16px;background:var(--bg)}
+.hero{background:var(--pu);color:#fff;border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.hero small{font-weight:700;opacity:.92}.hero .q{font-size:20px;font-weight:800;line-height:1.3}
+.btn{min-height:48px;border-radius:14px;border:0;background:var(--pu);color:#fff;font-weight:800;padding:0 18px}
+.btn.w{background:#fff;color:#4a2fc4}.btn.o{background:transparent;border:1px solid var(--pu);color:var(--put)}.btn.b{background:var(--blt);background:#1d4ed8}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.chip{min-height:44px;padding:0 14px;border-radius:22px;border:1px solid var(--bd);background:var(--soft);color:var(--put);font-weight:700}
+.chip.on{background:var(--pu);color:#fff;border-color:var(--pu)}
+.chip.bl{background:var(--soft2);border-color:var(--bd2);color:var(--blt)}
+.ad{border:1px dashed var(--bd);border-radius:14px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ad b{font-size:11px;letter-spacing:.06em;color:var(--mut)}
+.link{background:none;border:0;color:var(--put);font-weight:800;min-height:44px}
+textarea{width:100%;box-sizing:border-box;border:1px solid var(--bd);border-radius:14px;padding:12px;background:var(--bg);resize:vertical;min-height:110px}
+.chat{display:flex;flex-direction:column;gap:8px}
+.bub{max-width:85%;padding:10px 14px;border-radius:18px;line-height:1.45;white-space:pre-wrap}
+.me{align-self:flex-end;background:var(--pu);color:#fff;border-bottom-right-radius:6px}
+.bot{align-self:flex-start;background:var(--soft2);border:1px solid var(--bd2);border-bottom-left-radius:6px}
+.send{display:flex;gap:8px}.send input{flex:1;min-height:48px;border:1px solid var(--bd);border-radius:14px;padding:0 14px;background:var(--bg)}
+.av{width:52px;height:52px;border-radius:26px;background:var(--soft);color:var(--put);font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.lock{position:relative}.lock .blur{filter:blur(5px);pointer-events:none;user-select:none;display:flex;flex-direction:column;gap:10px}
+.lock .cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px}
+nav{position:sticky;bottom:0;display:flex;justify-content:space-around;border-top:1px solid var(--bd);background:var(--bg);padding:6px 0}
+nav button{border:0;background:none;min-height:52px;min-width:64px;font-size:12px;font-weight:700;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button.on{color:var(--put)}
+.ov{position:fixed;inset:0;background:rgba(18,16,31,.6);display:flex;align-items:flex-end;justify-content:center;z-index:20}
+.sheet{background:var(--bg);width:100%;max-width:440px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:90px;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:14px;font-weight:700;z-index:30;max-width:90%}
+.tag{display:inline-block;padding:2px 10px;border-radius:12px;background:var(--soft2);border:1px solid var(--bd2);color:var(--blt);font-size:12px;font-weight:700}
+a.btn{display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+var $=function(s){return document.querySelector(s)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function ld(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var MSGS=["Você não precisa estar bem o tempo todo. Estar presente já é muito.","Pequenos passos também são progresso. Hoje, um já basta.","Pedir ajuda não é fraqueza, é coragem.","Seus sentimentos são válidos, mesmo quando ninguém entende.","Respire fundo: você já superou dias difíceis antes.","Você é mais do que suas notas, suas fotos e suas comparações.","Descansar também é cuidar de você.","Conversar com alguém de confiança pode aliviar um peso enorme.","Errar faz parte de aprender. Seja gentil consigo mesmo.","Hoje, tente fazer uma coisa que te faça bem, por menor que seja."];
+var CHIPS=["Estou ansioso(a) com a prova","Não consigo dormir","Briguei com um amigo","Me sinto sozinho(a)"];
+var PSIS=[{n:"Dra. Camila R.",i:"CR",e:"Ansiedade e autoestima",s:["Hoje 19h","Amanhã 10h"]},{n:"Dr. Thiago M.",i:"TM",e:"Vida escolar e foco",s:["Amanhã 16h","Sex 15h"]},{n:"Dra. Beatriz S.",i:"BS",e:"Relações e família",s:["Sex 18h","Sáb 11h"]}];
+var INSTR="Você é o assistente do MenteJovem, app de bem-estar para adolescentes no Brasil. Responda em português, tom acolhedor e informal, no máximo 4 frases curtas, com uma sugestão prática simples (respiração, escrever no diário, pausa, falar com alguém de confiança). Você não é psicólogo e não faz diagnóstico. Se a pessoa falar em se machucar, suicídio ou perigo, responda com carinho, peça para procurar um adulto de confiança agora e indique o CVV (ligue 188, 24h, gratuito) ou o SAMU 192. Se o assunto for sério ou recorrente, sugira conversar com um psicólogo na aba Psicólogos.\n\nConversa:";
+var TOPICS=["Escola","Família","Amizades","Ansiedade","Outros"];
+var RISK=/me matar|suic[ií]d|quero morrer|vontade de morrer|me machucar|me cortar|automutila|acabar com tudo|sumir pra sempre/i;
+var POSTS=[{id:'s1',n:'Lua',t:'Escola',x:'Tenho prova de matemática amanhã e sinto que vou travar. Já estudei, mas o coração não para de acelerar.',h:12,i:5,r:['Já passei por isso. Respirar fundo contando 4 segundos e soltar em 6 me ajudou muito. Você consegue!','Você já estudou, isso conta. Boa sorte amanhã 💜']},{id:'s2',n:'Sol',t:'Amizades',x:'Meus amigos combinaram um rolê e eu não fui chamado. Fico me perguntando o que eu fiz de errado.',h:21,i:14,r:['Pode ter sido só esquecimento. Que tal chamar alguém pra fazer algo só vocês dois?']},{id:'s3',n:'Nuvem',t:'Família',x:'Meus pais brigam muito e eu fico no quarto com fone pra não ouvir. Só queria um pouco de paz.',h:30,i:9,r:[]},{id:'s4',n:'Estrela',t:'Ansiedade',x:'Hoje eu consegui sair de casa e ir pra aula mesmo com vontade de ficar na cama. Foi pequeno, mas foi meu.',h:40,i:23,r:['Isso é enorme! Parabéns 💜']}];
+function today(){return new Date().toLocaleDateString('sv-SE')}
+var S={tab:'home',plan:ld('mj_plan','free'),diary:ld('mj_diary',[]),mood:ld('mj_mood',{}),chat:[],busy:false,draft:'',cdraft:'',msg:Math.floor(Date.now()/864e5)%MSGS.length,sheet:null,toast:'',booked:{},err:'',cm:ld('mj_cm',{mine:[],rx:{},rp:{},hid:{}}),pdraft:'',ptopic:'Outros',rdraft:'',open:null};
+function paid(){return S.plan!=='free'}
+function streak(){var d={},n=0,t=new Date();S.diary.forEach(function(e){d[e.d]=1});for(;;){var k=t.toLocaleDateString('sv-SE');if(d[k]){n++;t.setDate(t.getDate()-1)}else if(n===0&&k===today()){t.setDate(t.getDate()-1)}else break}return n}
+function ad(){return paid()?'':'<div class="ad"><div><b>ANÚNCIO</b><div style="font-weight:600;font-size:14px">Espaço do anunciante</div></div><button class="link" data-a="plans">Remover</button></div>'}
+var IC={com:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c2.4.6 4 2.3 4 5.2"/>',home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',diary:'<path d="M5 3h12a2 2 0 0 1 2 2v16H7a2 2 0 0 1-2-2zM9 7h6M9 11h6"/>',ai:'<path d="M4 5h16v11H9l-5 4z"/>',psi:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>'};
+function ico(k){return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[k]+'</svg>'}
+function vHome(){var moods=["Bem","Ansioso","Triste","Cansado"],m=S.mood[today()];
+return '<div><h1>Oi! Como você está hoje?</h1></div><div class="row">'+moods.map(function(x){return '<button class="chip'+(m===x?' on':'')+'" data-a="mood" data-v="'+x+'">'+x+'</button>'}).join('')+'</div>'+
+'<div class="hero"><small>Mensagem do dia</small><div class="q">“'+esc(MSGS[S.msg])+'”</div><button class="btn w" data-a="nextmsg">Outra mensagem</button></div>'+
+'<div class="row"><div class="card" style="flex:1"><div class="mut">Sequência no diário</div><div style="font-size:26px;font-weight:800;color:var(--put)">'+streak()+' dia(s)</div></div><button class="card" style="flex:1;text-align:left;background:var(--soft2);border-color:var(--bd2)" data-a="tab" data-v="ai"><div class="mut">Precisa de ajuda rápida?</div><div style="font-weight:800;color:var(--blt)">Falar com a IA</div></button></div>'+
+(paid()?'<div class="card" style="background:var(--soft)"><b>Plano '+(S.plan==='plus'?'Plus':'Premium')+' ativo.</b><div class="mut">Seus psicólogos estão na aba Psicólogos.</div></div>':'<div class="card" style="background:var(--soft)"><b>Quer conversar com um psicólogo?</b><div class="mut" style="margin:4px 0 10px">Sessões por videochamada nos planos pagos, com 1 mês grátis.</div><button class="btn" data-a="plans">Ver planos</button></div>')+'<button class="card" style="text-align:left;background:var(--soft)" data-a="tab" data-v="com"><div class="mut">Precisa desabafar?</div><div style="font-weight:800;color:var(--put)">Ir para a Comunidade</div></button>'+ad()}
+function vDiary(){var h=S.diary.map(function(e,i){return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><b>'+esc(e.l)+'</b><button class="link" data-a="del" data-v="'+i+'" aria-label="Apagar entrada">Apagar</button></div><div style="white-space:pre-wrap;margin-top:4px">'+esc(e.t)+'</div></div>'}).join('');
+return '<h1>Mini diário</h1><div class="mut" style="margin-top:-8px">Escreva em 1 minuto. Só você vê.</div><textarea id="dt" placeholder="O que aconteceu hoje? Como você se sentiu?">'+esc(S.draft)+'</textarea><button class="btn" data-a="save">Salvar no diário</button>'+(h||'<div class="mut">Nenhuma entrada ainda. A primeira é a mais difícil.</div>')+ad()}
+function vAi(){var c=S.chat.map(function(m,i){return '<div class="bub '+(m.r==='u'?'me':'bot')+'"'+(m.r==='a'&&i===S.chat.length-1?' id="live"':'')+'>'+esc(m.t)+'</div>'}).join('');
+return '<h1>Ajuda rápida com IA</h1><div class="mut" style="margin-top:-8px">Dicas para o momento. Não substitui um psicólogo.</div>'+(S.chat.length?'':'<div class="row">'+CHIPS.map(function(x,i){return '<button class="chip bl" data-a="chip" data-v="'+i+'">'+esc(x)+'</button>'}).join('')+'</div>')+'<div class="chat">'+c+'</div>'+(S.err?'<div class="mut" role="alert">'+esc(S.err)+'</div>':'')+'<div class="send"><input id="ci" placeholder="Escreva aqui…" value="'+esc(S.cdraft)+'" aria-label="Mensagem"><button class="btn" data-a="send"'+(S.busy?' disabled':'')+'>Enviar</button></div><div class="mut" style="font-size:12px">Em risco agora? Ligue 188 (CVV, 24h) ou 192 (SAMU).</div>'}
+function pcard(p){var b=S.booked[p.n];return '<div class="card"><div class="row" style="flex-wrap:nowrap;align-items:center"><div class="av">'+p.i+'</div><div><b>'+p.n+'</b><div class="mut">'+p.e+' · CRP [00/00000]</div></div></div><div class="row" style="margin-top:10px">'+(b?'<div class="chip on" style="display:flex;align-items:center">Marcada: '+b+'</div>':p.s.map(function(s){return '<button class="chip" data-a="book" data-v="'+p.n+'|'+s+'"'+(paid()?'':' tabindex="-1"')+'>'+s+'</button>'}).join(''))+'</div></div>'}
+function vPsi(){var l=PSIS.map(pcard).join('');return '<h1>Psicólogos</h1><div class="mut" style="margin-top:-8px">Sessões por videochamada com profissionais para adolescentes.</div>'+(paid()?l+'<div class="card" style="background:var(--soft)">Seu plano inclui '+(S.plan==='plus'?'2':'4')+' sessões por mês.</div>':'<div class="lock"><div class="blur" aria-hidden="true">'+l+'</div><div class="cta"><div style="font-size:20px;font-weight:800">Área dos planos pagos</div><div class="mut">Videochamada com psicólogos. 1 mês grátis.</div><button class="btn" data-a="plans">Testar 1 mês grátis</button></div></div>')}
+function vSheet(){var P=[['free','Gratuito','R$ 0','Diário, mensagens do dia e IA de ajuda rápida. Com anúncios.'],['plus','Plus','R$ 29,90/mês','Sem anúncios + 2 videochamadas por mês.'],['premium','Premium','R$ 59,90/mês','Tudo do Plus + 4 videochamadas e mensagens com o psicólogo.']];
+return '<div class="ov" data-a="close"><div class="sheet" role="dialog" aria-label="Planos" data-stop="1"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Escolha seu plano</h2><button class="link" data-a="close">Fechar</button></div><div class="mut">1 mês grátis nos planos pagos. Depois, cobrança automática. Cancele quando quiser.</div>'+P.map(function(p){var cur=S.plan===p[0];return '<div class="card" style="'+(p[0]==='premium'?'border:2px solid var(--pu);background:var(--soft)':'')+'"><div style="display:flex;justify-content:space-between"><b style="font-size:18px">'+p[1]+'</b>'+(p[0]==='premium'?'<span class="chip on" style="min-height:0;padding:2px 10px;font-size:12px">MAIS POPULAR</span>':'')+'</div><div style="font-size:24px;font-weight:800">'+p[2]+'</div><div class="mut" style="margin:4px 0 10px">'+p[3]+'</div>'+(cur?'<div class="chip on" style="display:inline-flex;align-items:center">Plano atual</div>':'<button class="btn'+(p[0]==='free'?' o':'')+'" data-a="plan" data-v="'+p[0]+'">'+(p[0]==='free'?'Voltar ao gratuito':'Testar 1 mês grátis')+'</button>')+'</div>'}).join('')+'</div></div>'}
+function cnt(p,k){return p[k]+(((S.cm.rx[p.id]||{})[k])?1:0)}
+function pcom(p){var o=S.open===p.id,rs=p.r.concat(S.cm.rp[p.id]||[]),rx=S.cm.rx[p.id]||{};
+return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div><b>'+esc(p.n)+'</b> <span class="tag">'+esc(p.t)+'</span></div>'+(p.mine?'<button class="link" data-a="pdel" data-v="'+p.id+'">Apagar</button>':'<button class="link" data-a="rep" data-v="'+p.id+'">Denunciar</button>')+'</div><div style="white-space:pre-wrap;margin:6px 0 10px">'+esc(p.x)+'</div><div class="row"><button class="chip'+(rx.h?' on':'')+'" aria-pressed="'+!!rx.h+'" data-a="rx" data-v="'+p.id+'|h">💜 Abraço · '+cnt(p,'h')+'</button><button class="chip'+(rx.i?' on':'')+'" aria-pressed="'+!!rx.i+'" data-a="rx" data-v="'+p.id+'|i">🤝 Me identifico · '+cnt(p,'i')+'</button><button class="chip bl" aria-expanded="'+o+'" aria-label="Respostas" data-a="open" data-v="'+p.id+'">💬 '+rs.length+'</button></div>'+(o?'<div class="chat" style="margin-top:10px">'+rs.map(function(r){return '<div class="bub bot">'+esc(r)+'</div>'}).join('')+'<div class="send"><input id="ri" maxlength="300" placeholder="Escreva uma palavra de apoio…" aria-label="Responder" value="'+esc(S.rdraft)+'"><button class="btn" data-a="reply" data-v="'+p.id+'">Enviar</button></div></div>':'')+'</div>'}
+function vComm(){var l=S.cm.mine.concat(POSTS).filter(function(p){return !S.cm.hid[p.id]}).map(pcom).join('');
+return '<h1>Comunidade</h1><div class="mut" style="margin-top:-8px">Desabafe sem se identificar. Aqui a gente se apoia.</div><div class="card" style="background:var(--soft)"><b>Combinados</b><div class="mut">Respeito sempre. Sem bullying, sem citar nomes e sem passar contatos ou fotos.</div></div><textarea id="pt" maxlength="500" aria-label="Seu desabafo" placeholder="O que você está sentindo? Pode desabafar…">'+esc(S.pdraft)+'</textarea><div class="row">'+TOPICS.map(function(t){return '<button class="chip'+(S.ptopic===t?' on':'')+'" data-a="topic" data-v="'+t+'">'+t+'</button>'}).join('')+'</div><button class="btn" data-a="post">Compartilhar anonimamente</button>'+(l||'<div class="mut">Nada por aqui ainda.</div>')+'<div class="mut" style="font-size:12px">Em risco agora? Ligue 188 (CVV, 24h) ou 192 (SAMU).</div>'+ad()}
+function vCrisis(){return '<div class="ov" data-a="close"><div class="sheet" role="dialog" aria-label="Apoio" data-stop="1"><div style="display:flex;justify-content:space-between;align-items:center"><h2>A gente se importa com você</h2><button class="link" data-a="close">Fechar</button></div><div>O que você escreveu parece muito pesado. Antes de compartilhar, converse com alguém agora: um adulto de confiança ou o CVV, que é 24h e gratuito.</div><a class="btn" href="tel:188">Ligar para o CVV (188)</a><a class="btn o" href="tel:192">SAMU (192)</a><button class="btn b" data-a="tab" data-v="ai">Conversar com a IA</button><div class="mut">Seu texto continua salvo aqui. Se estiver em perigo agora, ligue 192.</div></div></div>'}
+function doReply(id){var x=S.rdraft.trim();if(!x)return;if(RISK.test(x)){S.sheet='crisis';render();return}(S.cm.rp[id]=S.cm.rp[id]||[]).push(x);S.rdraft='';sv('mj_cm',S.cm);render()}
+function render(){var v={home:vHome,diary:vDiary,ai:vAi,com:vComm,psi:vPsi}[S.tab]();var N=[['home','Início'],['diary','Diário'],['ai','IA'],['com','Comunidade'],['psi','Psicólogos']];
+$('#app').innerHTML='<header><div class="logo">Mente<span>Jovem</span></div><button class="badge" data-a="plans">'+(paid()?(S.plan==='plus'?'Plus':'Premium'):'Gratuito · Ver planos')+'</button></header><main>'+v+'</main><nav>'+N.map(function(n){return '<button class="'+(S.tab===n[0]?'on':'')+'" data-a="tab" data-v="'+n[0]+'"'+(S.tab===n[0]?' aria-current="page"':'')+'>'+ico(n[0])+n[1]+'</button>'}).join('')+'</nav>'+(S.sheet===1?vSheet():S.sheet==='crisis'?vCrisis():'')+(S.toast?'<div class="toast" role="status">'+esc(S.toast)+'</div>':'')}
+function say(t){S.toast=t;render();setTimeout(function(){S.toast='';render()},2600)}
+function keep(){var a=$('#dt');if(a)S.draft=a.value;var i=$('#ci');if(i)S.cdraft=i.value;var t=$('#pt');if(t)S.pdraft=t.value;var r=$('#ri');if(r)S.rdraft=r.value}
+async function ask(text){
+  S.err='';
+  S.chat.push({r:'u',t:text},{r:'a',t:'…'});
+  S.cdraft='';
+  S.busy=true;
+  render();
+  try {
+    const history = S.chat.slice(0,-1).slice(-12).map(m => ({
+      role: m.r === 'u' ? 'user' : 'assistant',
+      content: m.t
+    }));
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: history })
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || 'Não foi possível responder agora.');
+    S.chat[S.chat.length-1].t = data.reply || 'Não consegui formular uma resposta. Tente novamente.';
+  } catch (e) {
+    S.chat.splice(-2,2);
+    S.cdraft=text;
+    S.err=e.message || 'A IA não está disponível agora. Tente de novo em instantes.';
+  }
+  S.busy=false;
+  render();
+}
+document.addEventListener('click',function(ev){var t=ev.target.closest('[data-a]');if(!t)return;if(t.classList.contains('ov')&&ev.target!==t)return;var a=t.dataset.a,v=t.dataset.v;keep();
+if(a==='tab'){S.tab=v;S.sheet=null;S.err='';render();window.scrollTo(0,0)}
+else if(a==='mood'){S.mood[today()]=v;sv('mj_mood',S.mood);render()}
+else if(a==='nextmsg'){S.msg=(S.msg+1)%MSGS.length;render()}
+else if(a==='save'){var x=S.draft.trim();if(!x){say('Escreva algo antes de salvar.');return}S.diary.unshift({d:today(),l:new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'}),t:x});S.draft='';sv('mj_diary',S.diary);say('Entrada salva.')}
+else if(a==='del'){S.diary.splice(+v,1);sv('mj_diary',S.diary);render()}
+else if(a==='chip'){ask(CHIPS[+v])}
+else if(a==='send'){if(S.busy)return;var q=S.cdraft.trim();if(q)ask(q)}
+else if(a==='topic'){S.ptopic=v;render()}
+else if(a==='post'){var px=S.pdraft.trim();if(!px){say('Escreva algo antes de compartilhar.');return}if(RISK.test(px)){S.sheet='crisis';render();return}S.cm.mine.unshift({id:'m'+Date.now(),n:'Você',t:S.ptopic,x:px,h:0,i:0,r:[],mine:1});S.pdraft='';sv('mj_cm',S.cm);say('Compartilhado. Você não está sozinho(a).')}
+else if(a==='rx'){var rp=v.split('|'),ro=S.cm.rx[rp[0]]=S.cm.rx[rp[0]]||{};ro[rp[1]]=!ro[rp[1]];sv('mj_cm',S.cm);render()}
+else if(a==='open'){S.open=S.open===v?null:v;S.rdraft='';render()}
+else if(a==='reply'){doReply(v)}
+else if(a==='pdel'){S.cm.mine=S.cm.mine.filter(function(m){return m.id!==v});sv('mj_cm',S.cm);render()}
+else if(a==='rep'){S.cm.hid[v]=1;sv('mj_cm',S.cm);say('Denúncia enviada (demonstração). Escondemos este post para você.')}
+else if(a==='plans'){S.sheet=1;render()}
+else if(a==='close'){S.sheet=null;render()}
+else if(a==='plan'){S.plan=v;sv('mj_plan',v);S.sheet=null;render();say(v==='free'?'Você voltou ao plano gratuito.':'1 mês grátis ativado (demonstração).')}
+else if(a==='book'){if(!paid()){S.sheet=1;render();return}var p=v.split('|');S.booked[p[0]]=p[1];say('Videochamada marcada: '+p[1]+' (demonstração).')}});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.id==='ci'&&!S.busy){keep();var q=S.cdraft.trim();if(q)ask(q)}});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.id==='ri'){keep();doReply(S.open)}});
+render();
+</script>
+</body>
+</html>
